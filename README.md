@@ -1,1 +1,1 @@
-# vue-products-app-v1
+# Products Vue App
