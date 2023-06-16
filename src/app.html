@@ -25,7 +25,7 @@
         </nav>
         <a @click="toggleSidebar" class="top-bar-cart-link">
           <i class="icofont-cart-alt icofont-1x"></i>
-          <span>Cart (0)</span>
+          <span>Cart ({{totalQuantity}})</span>
         </a>
       </header>
 
@@ -108,10 +108,18 @@
             cart: {}
           }
         },
+        computed:{
+          totalQuantity(){
+            return Object.values(this.cart).reduce((acc,curr)=>{
+              return acc + curr
+            },0)
+          }
+        },
         methods: {
           addToCart(name,index) {
             if(!this.cart[name]) this.cart[name] = 0
             this.cart[name] += this.inventory[index].quantity
+            this.inventory[index].quantity = 0
             console.log(this.cart)
           },
           toggleSidebar(){
